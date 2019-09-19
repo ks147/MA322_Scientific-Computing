@@ -23,9 +23,9 @@ The value of spline at 0.2013 = -0.279850
 Error at 0.2013 = 5.766848e-05
 ------------------------------------------------------------------
 Q6.
-(a) Natural Spline Interpolation
- 	[position speed] = [775.266667 74.177778]
-(b) Clamped Spline Interpolation
-       [position speed] = [775.266667 74.177778]
+Natural Spline Interpolation
+ [position speed] = [775.266667 74.177778]
+Clamped Spline Interpolation
+ [position speed] = [776.946667 74.697778]
 -------------------------------------------------------------------
 EOF
