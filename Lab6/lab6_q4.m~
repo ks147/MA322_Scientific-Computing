@@ -1,0 +1,16 @@
+%Q4 Compute /integrand 1/(1+4*X^2)
+
+function y = Trapezoid(f,a,b)
+    y = 0.25*(f(a)+f(b))*(b-a);
+end
+function y = Simpson(f,a,b)
+    y = (b-a)*(f(a)+4*f(b)+f(a))/6;
+end
+function y = Midpt(f,a,b)
+    y = (b-a)*(f((a+b)/2));
+end
+function y = three-eigth_Simpson(f,a,b)
+    h = (b-a)/3;
+    y = 3*h*(f(a)+f(a+h)+f(a+2*h)+f(b))/8;
+end
+function y = 
