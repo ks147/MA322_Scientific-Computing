@@ -9,7 +9,7 @@ fprintf('Approximate Integral = %f\n\n',composite_simpson(f,a,b,ans));
 figure(1);
 plot(sub_interval,log(actual_error));
 xlabel('Number of Sub intervals');
-ylabel('Error');
+ylabel('log(Error)');
 %(b)
 f = @(x) sqrt(1-x^2) - x;
 a = 0;
@@ -21,7 +21,7 @@ fprintf('Approximate Integral = %f\n\n',composite_simpson(f,a,b,ans));
 figure(2);
 plot(sub_interval,log(actual_error));
 xlabel('Number of Sub intervals');
-ylabel('Error');
+ylabel('log(Error)');
 
 
 function [y,sub_interval,actual_error] = error(f,a,b,e)

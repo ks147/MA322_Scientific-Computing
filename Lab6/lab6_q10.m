@@ -2,9 +2,9 @@
 syms x
 f = 2*sqrt(1-(x^2)/9);
 f_ = matlabFunction(diff(f));
-g = @(x) sqrt(1-(f_(x))^2);
+g = @(x) sqrt(1+(f_(x))^2);
 
-[graph_length,n,h] = simpson_error(g,-2,2,10^-6);
+[graph_length,n,h] = simpson_error(g,-2.99,2.99,10^-6);
 fprintf('length of the graph of the ellipse = %f\n',2*graph_length);
 
 %%functions %%
