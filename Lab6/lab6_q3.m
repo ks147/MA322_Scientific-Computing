@@ -1,5 +1,3 @@
-clear all;
-clc;
 
 %Part a
 syms x;

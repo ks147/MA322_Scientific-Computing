@@ -4,6 +4,7 @@ a = 0;
 b = 1;
 [ans,sub_interval,actual_error] = error(f,a,b,5*10^-6);
 fprintf('Number of sub-intervals to get error < 10^-5/2 = %d\n',ans);
+fprintf('Approximate Integral = %f\n\n',composite_simpson(f,a,b,ans));
 
 figure(1);
 plot(sub_interval,log(actual_error));
@@ -15,6 +16,7 @@ a = 0;
 b = 1/sqrt(2);
 [ans,sub_interval,actual_error] = error(f,a,b,5*10^-6);
 fprintf('Number of sub-intervals to get error < 10^-5/2 = %d\n',ans);
+fprintf('Approximate Integral = %f\n\n',composite_simpson(f,a,b,ans));
 
 figure(2);
 plot(sub_interval,log(actual_error));
