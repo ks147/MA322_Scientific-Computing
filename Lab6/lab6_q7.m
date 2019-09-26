@@ -46,6 +46,7 @@ integral = 0;
 for i=1:n
     x = a + (i-1)*h;
     y = a + i*h;
+
     integral = integral + h*(f(x)+4*f((x+y)/2) + f(y))/6;
 end
 end
