@@ -1,4 +1,4 @@
-%Area under ellipse
+%length under ellipse
 syms x
 f = 2*sqrt(1-(x^2)/9);
 f_ = matlabFunction(diff(f));
