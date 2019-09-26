@@ -1,41 +1,190 @@
+clear all;
+clc;
 
-for i=1:4 
-if i==1    
-f = @(x) 2*x/(x^2-4);
+%Part a
+syms x;
+df = (2*x)/(x^2 - 4);
+df = diff(df);
+ddf = diff(df);
+df3 = diff(ddf);
+df4 = diff(df3);
+df = matlabFunction(df);
+ddf = matlabFunction(ddf);
+df4 = matlabFunction(df4);
+f = @(x) (2.*x)./(x.^2 - 4);
 a = 1;
 b = 1.6;
-elseif i==2
-    f = @(x) exp(3*x)*sin(2*x);
-    a = 0;
-    b = pi/4;
-elseif i==3
-    f = @(x) exp(3*x)*sin(2*x);
-    a = 0;
-    b = pi/4;
-else 
-    f = @(x) 1/(x.*log(x));
-    a = exp(1);
-    b = exp(2);
-end
 
-    fprintf('(%d) Area under f(x)\n\tEstimate by Midpt = %f\n',i,Midpt(f,a,b));
-    fprintf('\tEstimate by Trapezoid Rule = %f\n',Trapezoid(f,a,b));
-    fprintf('\tEstimate by Simpson Rule = %f\n',Simpson(f,a,b));
-    fprintf('\tEstimate by Corrected Trapezoid Rule = %f\n',Corr_Trapezoid(f,a,b));
-    fprintf('\tActual Area = %f\n',integral(f,a,b,'ArrayValued',true));
-    
-end
+range = a:0.01:b;
+mxddf = max(abs(ddf(range)));
 
-function y = Trapezoid(f,a,b)
-    y = 0.5*(f(a)+f(b))*(b-a);
-end
-function y = Simpson(f,a,b)
-    y = (b-a)*(f(a)+4*f((a+b)/2)+f(a))/6;
-end
-function y = Midpt(f,a,b)
-    y = (b-a)*(f((a+b)/2));
-end
-function y = Corr_Trapezoid(f,a,b)
-    y = (b-a)*(f(a)+f(b))/2 + (b-a)^2*(f(a)-f(b))/12;
-end
+I = integral(f,a,b);
+val = (b-a)*f((a+b)/2);
+fprintf('By Midpoint rule, estimated value is %.5f.\n', val);
+actual_error = abs(I-val);
+error_bound = (mxddf*(b-a)^3)/24;
+fprintf('Bound for error by error formula is %.5f.\n', error_bound);
+fprintf('Actual error is %.5f.\n', actual_error);
 
+val = ((b-a)/2)*(f(a)+f(b));
+fprintf('By Trapezoid rule, estimated value is %.5f.\n', val);
+actual_error = abs(I-val);
+error_bound = (mxddf*(b-a)^3)/12;
+fprintf('Bound for error by error formula is %.5f.\n', error_bound);
+fprintf('Actual error is %.5f.\n', actual_error);
+
+mxdf4 = max(abs(df4(range)));
+val = ((b-a)/6)*(f(a) + 4*f((a+b)/2) + f(b));
+fprintf('By Simpsons rule, estimated value is %.5f.\n', val);
+actual_error = abs(I-val);
+error_bound = (mxdf4*((b-a)/2)^5)/90;
+fprintf('Bound for error by error formula is %.5f.\n', error_bound);
+fprintf('Actual error is %.5f.\n', actual_error);
+
+val = ((b-a)/2)*(f(a) + f(b)) - ((((b-a)^2)/12)*(df(b) - df(a)));
+fprintf('By Corrected Trapezoidal rule, estimated value is %.5f.\n', val);
+actual_error = abs(I-val);
+error_bound = (mxdf4*(b-a)^5)/720;
+fprintf('Bound for error by error formula is %.5f.\n', error_bound);
+fprintf('Actual error is %.5f.\n\n', actual_error);
+
+%Part b
+syms x;
+df = exp(3*x)*sin(2*x);
+df = diff(df);
+ddf = diff(df);
+df3 = diff(ddf);
+df4 = diff(df3);
+df = matlabFunction(df);
+ddf = matlabFunction(ddf);
+df4 = matlabFunction(df4);
+f = @(x) exp(3.*x).*sin(2.*x);
+a = 0;
+b = pi/4;
+
+range = a:0.01:b;
+mxddf = max(abs(ddf(range)));
+
+I = integral(f,a,b);
+val = (b-a)*f((a+b)/2);
+fprintf('By Midpoint rule, estimated value is %.5f.\n', val);
+actual_error = abs(I-val);
+error_bound = (mxddf*(b-a)^3)/24;
+fprintf('Bound for error by error formula is %.5f.\n', error_bound);
+fprintf('Actual error is %.5f.\n', actual_error);
+
+val = ((b-a)/2)*(f(a)+f(b));
+fprintf('By Trapezoid rule, estimated value is %.5f.\n', val);
+actual_error = abs(I-val);
+error_bound = (mxddf*(b-a)^3)/12;
+fprintf('Bound for error by error formula is %.5f.\n', error_bound);
+fprintf('Actual error is %.5f.\n', actual_error);
+
+mxdf4 = max(abs(df4(range)));
+val = ((b-a)/6)*(f(a) + 4*f((a+b)/2) + f(b));
+fprintf('By Simpsons rule, estimated value is %.5f.\n', val);
+actual_error = abs(I-val);
+error_bound = (mxdf4*((b-a)/2)^5)/90;
+fprintf('Bound for error by error formula is %.5f.\n', error_bound);
+fprintf('Actual error is %.5f.\n', actual_error);
+
+val = ((b-a)/2)*(f(a) + f(b)) - ((((b-a)^2)/12)*(df(b) - df(a)));
+fprintf('By Corrected Trapezoidal rule, estimated value is %.5f.\n', val);
+actual_error = abs(I-val);
+error_bound = (mxdf4*(b-a)^5)/720;
+fprintf('Bound for error by error formula is %.5f.\n', error_bound);
+fprintf('Actual error is %.5f.\n\n', actual_error);
+
+%Part c
+syms x;
+df = (2*x)/(x^2 - 4);
+df = diff(df);
+ddf = diff(df);
+df3 = diff(ddf);
+df4 = diff(df3);
+df = matlabFunction(df);
+ddf = matlabFunction(ddf);
+df4 = matlabFunction(df4);
+f = @(x) (sin(x).*sin(x) - 2.*x.*sin(x) + 1);
+a = 0.75;
+b = 1.3;
+
+range = a:0.01:b;
+mxddf = max(abs(ddf(range)));
+
+I = integral(f,a,b);
+val = (b-a)*f((a+b)/2);
+fprintf('By Midpoint rule, estimated value is %.5f.\n', val);
+actual_error = abs(I-val);
+error_bound = (mxddf*(b-a)^3)/24;
+fprintf('Bound for error by error formula is %.5f.\n', error_bound);
+fprintf('Actual error is %.5f.\n', actual_error);
+
+val = ((b-a)/2)*(f(a)+f(b));
+fprintf('By Trapezoid rule, estimated value is %.5f.\n', val);
+actual_error = abs(I-val);
+error_bound = (mxddf*(b-a)^3)/12;
+fprintf('Bound for error by error formula is %.5f.\n', error_bound);
+fprintf('Actual error is %.5f.\n', actual_error);
+
+mxdf4 = max(abs(df4(range)));
+val = ((b-a)/6)*(f(a) + 4*f((a+b)/2) + f(b));
+fprintf('By Simpsons rule, estimated value is %.5f.\n', val);
+actual_error = abs(I-val);
+error_bound = (mxdf4*((b-a)/2)^5)/90;
+fprintf('Bound for error by error formula is %.5f.\n', error_bound);
+fprintf('Actual error is %.5f.\n', actual_error);
+
+val = ((b-a)/2)*(f(a) + f(b)) - ((((b-a)^2)/12)*(df(b) - df(a)));
+fprintf('By Corrected Trapezoidal rule, estimated value is %.5f.\n', val);
+actual_error = abs(I-val);
+error_bound = (mxdf4*(b-a)^5)/720;
+fprintf('Bound for error by error formula is %.5f.\n', error_bound);
+fprintf('Actual error is %.5f.\n\n', actual_error);
+
+%Part d
+syms x;
+df = (2*x)/(x^2 - 4);
+df = diff(df);
+ddf = diff(df);
+df3 = diff(ddf);
+df4 = diff(df3);
+df = matlabFunction(df);
+ddf = matlabFunction(ddf);
+df4 = matlabFunction(df4);
+f = @(x) 1./(x.*log(x));
+a = exp(1);
+b = exp(1) + 1;
+
+range = a:0.01:b;
+mxddf = max(abs(ddf(range)));
+
+I = integral(f,a,b);
+val = (b-a)*f((a+b)/2);
+fprintf('By Midpoint rule, estimated value is %.5f.\n', val);
+actual_error = abs(I-val);
+error_bound = (mxddf*(b-a)^3)/24;
+fprintf('Bound for error by error formula is %.5f.\n', error_bound);
+fprintf('Actual error is %.5f.\n', actual_error);
+
+val = ((b-a)/2)*(f(a)+f(b));
+fprintf('By Trapezoid rule, estimated value is %.5f.\n', val);
+actual_error = abs(I-val);
+error_bound = (mxddf*(b-a)^3)/12;
+fprintf('Bound for error by error formula is %.5f.\n', error_bound);
+fprintf('Actual error is %.5f.\n', actual_error);
+
+mxdf4 = max(abs(df4(range)));
+val = ((b-a)/6)*(f(a) + 4*f((a+b)/2) + f(b));
+fprintf('By Simpsons rule, estimated value is %.5f.\n', val);
+actual_error = abs(I-val);
+error_bound = (mxdf4*((b-a)/2)^5)/90;
+fprintf('Bound for error by error formula is %.5f.\n', error_bound);
+fprintf('Actual error is %.5f.\n', actual_error);
+
+val = ((b-a)/2)*(f(a) + f(b)) - ((((b-a)^2)/12)*(df(b) - df(a)));
+fprintf('By Corrected Trapezoidal rule, estimated value is %.5f.\n', val);
+actual_error = abs(I-val);
+error_bound = (mxdf4*(b-a)^5)/720;
+fprintf('Bound for error by error formula is %.5f.\n', error_bound);
+fprintf('Actual error is %.5f.\n\n', actual_error);

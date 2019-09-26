@@ -1,3 +1,0 @@
-%Area under ellipse
-syms x
-f = sqrt(

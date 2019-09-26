@@ -2,12 +2,13 @@
 f = @(x) 4/(1+x^2);
 a = 0;
 b = 1;
+actual_integral = integral(f,a,b,'ArrayValued',true);
 
 fprintf('Estimate of pi using\n');
-fprintf('(a) Trapezoid Rule = %f\n',Trapezoid(f,a,b));
-fprintf('(b) Simpson one-third rule = %f\n',Simpson(f,a,b));
-fprintf('(c) Midpoint rule = %f\n',Midpt(f,a,b));
-fprintf('(d) Simpson three-eigth rule = %f\n',three_eigth_Simpson(f,a,b));
+fprintf('(a) Trapezoid Rule = %f\t Error = %f \n',Trapezoid(f,a,b),abs(Trapezoid(f,a,b)-actual_integral));
+fprintf('(b) Simpson one-third rule = %f\t Error = %f\n',Simpson(f,a,b),abs(Simpson(f,a,b)-actual_integral));
+fprintf('(c) Midpoint rule = %f\t Error = %f\n',Midpt(f,a,b),abs(Midpt(f,a,b)-actual_integral));
+fprintf('(d) Simpson three-eigth rule = %f\t Error = %f\n',three_eigth_Simpson(f,a,b),abs(three_eigth_Simpson(f,a,b)-actual_integral));
 function y = Trapezoid(f,a,b)
     y = 0.5*(f(a)+f(b))*(b-a);
 end
