@@ -10,15 +10,14 @@ alpha = 0;
 a = 0;
 b = 1;
 %lambda = -1,h = 0.01
+
 h = 0.01;
-fprintf('lambda = %f h = %f\n',lambda,h);
 explicit_euler(a,b,f,h,alpha,actual_y,1);
 implicit_euler(a,b,f,h,alpha,actual_y,2);
 trapezoid_method(a,b,f,h,alpha,actual_y,3);
 
 %lambda = -1,h = 0.001
 h = 0.001;
-fprintf('lambda = %f h = %f\n',lambda,h);
 explicit_euler(a,b,f,h,alpha,actual_y,4);
 implicit_euler(a,b,f,h,alpha,actual_y,5);
 trapezoid_method(a,b,f,h,alpha,actual_y,6);
@@ -27,13 +26,11 @@ trapezoid_method(a,b,f,h,alpha,actual_y,6);
 lambda = -10;
 f = @(t,y) lambda*y + 1/(1+t^2) - lambda*atan(t);
 h = 0.01;
-fprintf('lambda = %f h = %f\n',lambda,h);
 explicit_euler(a,b,f,h,alpha,actual_y,7);
 implicit_euler(a,b,f,h,alpha,actual_y,8);
 trapezoid_method(a,b,f,h,alpha,actual_y,9);
 
 %lambda = -10, h = 0.001
-fprintf('lambda = %f h = %f\n',lambda,h);
 h = 0.001;
 explicit_euler(a,b,f,h,alpha,actual_y,10);
 implicit_euler(a,b,f,h,alpha,actual_y,11);
@@ -43,14 +40,12 @@ trapezoid_method(a,b,f,h,alpha,actual_y,12);
 lambda = -50;
 f = @(t,y) lambda*y + 1/(1+t^2) - lambda*atan(t);
 h = 0.01;
-fprintf('lambda = %f h = %f\n',lambda,h);
 explicit_euler(a,b,f,h,alpha,actual_y,13);
 implicit_euler(a,b,f,h,alpha,actual_y,14);
 trapezoid_method(a,b,f,h,alpha,actual_y,15);
 
 %lambda = -50
 h = 0.001;
-fprintf('lambda = %f h = %f\n',lambda,h);
 explicit_euler(a,b,f,h,alpha,actual_y,16);
 implicit_euler(a,b,f,h,alpha,actual_y,17);
 trapezoid_method(a,b,f,h,alpha,actual_y,18);
