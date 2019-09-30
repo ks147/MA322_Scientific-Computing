@@ -41,7 +41,7 @@ implicit_euler(a,b,f,h,alpha,actual_y,10);
 
 %lamda = 5 , h = 0.001
 h = 0.001;
-fprintf('lambda = -5, h= 0.001\n');
+fprintf('lambda = 5, h= 0.001\n');
 explicit_euler(a,b,f,h,alpha,actual_y,11);
 implicit_euler(a,b,f,h,alpha,actual_y,12);
 
@@ -85,13 +85,12 @@ error(1) = abs(y(1)-actual_y(t(1)));
 %fprintf('%f\t%f\t%f\t%f\n',t(1),y(1),actual_y(t(1)),error(1));
 for i=2:N
     y_prev = y(i-1);
-    y_new = y(i-1)+10;
-    diff = abs(y_new-y_prev);
-    
-    while(diff > 1e-8)
-        y_new = y_prev + h*f(t(i-1),y_prev);
-        diff = abs(y_new - y_prev);
-        y_prev =  y_new;
+    y_new = y_prev + h*f(t(i),y_prev);
+        
+    while abs(y_new-y_prev) > 1e-8
+        save = y_new;
+        y_new = y_prev + h*f(t(i),y_prev);
+        y_prev =  save;
     end
     y(i) = y_new;
     error(i) = abs(y(i)-actual_y(t(i)));
