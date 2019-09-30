@@ -4,20 +4,19 @@ clc;
 close all;
 %(a)
 fprintf('Q4(a)\n');
-f = @(t,y) (2-2*t*y)/(t.^2+1);
+f = @(t,y) (2-2*t*y)/(t^2+1);
 a = 0;
 b = 1;
 alpha = 1;
 h = 0.01;
-actual_y = @(t) (2*t-1)/(t.^2+1);
+actual_y = @(t) (2*t_1)/(t^2+1);
 explicit_euler(a,b,f,h,alpha,actual_y,1);
-%implicit_euler(a,b,f,h,alpha,actual_y,2);
+implicit_euler(a,b,f,h,alpha,actual_y,2);
 trapezoid_method(a,b,f,h,alpha,actual_y,3);
 modified_euler(a,b,f,h,alpha,actual_y,4);
 
 %(b)
-fprintf('Q4(b)\n');
-f = @(t,y) (y.^2 + y)/t;
+f = @(t,y) (y^2 + y)/t;
 a = 1;
 b = 3;
 alpha = -2;
@@ -29,31 +28,28 @@ trapezoid_method(a,b,f,h,alpha,actual_y,7);
 modified_euler(a,b,f,h,alpha,actual_y,8);
 
 %(c)
-fprintf('Q4(c)\n');
-f = @(t,y) 1 + (y/t) + (y/t).^2;
+f = @(t,y) 1 + (y/t) + (y/t)^2;
 a = 1;
 b = 3;
 alpha = 0;
 h = 0.002;
-actual_y = @(t) t.*tan(log(t));
+actual_y = @(t) t*tan(log(t));
 explicit_euler(a,b,f,h,alpha,actual_y,9);
 implicit_euler(a,b,f,h,alpha,actual_y,10);
 trapezoid_method(a,b,f,h,alpha,actual_y,11);
 modified_euler(a,b,f,h,alpha,actual_y,12);
 
 %(d)
-fprintf('Q4(d)\n');
 f = @(t,y) exp(t-y);
 a = 0;
 b = 1;
 alpha = 1;
 h = 0.005;
-actual_y = @(t) log(exp(t) + exp(1) -1);
-explicit_euler(a,b,f,h,alpha,actual_y,13);
-implicit_euler(a,b,f,h,alpha,actual_y,14);
-trapezoid_method(a,b,f,h,alpha,actual_y,15);
-modified_euler(a,b,f,h,alpha,actual_y,16);
-
+actual_y = @(t) log(;
+explicit_euler(a,b,f,h,alpha,actual_y,5);
+implicit_euler(a,b,f,h,alpha,actual_y,6);
+trapezoid_method(a,b,f,h,alpha,actual_y,7);
+modified_euler(a,b,f,h,alpha,actual_y,8);
 
 %%functions 
 function [y,error,t] = explicit_euler(a,b,f,h,alpha,actual_y,fig_no)
