@@ -46,10 +46,10 @@ fprintf('Integral with n = 5: %f\n\n',gausslege(f,a,b,5));
 
 function I=gausslege(f,a,b,n)
 %I=gaussleg(f,a,b,n)
-%Aproximates integral using Gauss-Legendre cuadrature method
-%Legendre polin
+%Aproximates integral using Gauss-Legendre quadrature method
+%Legendre polynomial
 p=polegende(n);
-%Polin roots
+%Polynomial roots
 x=roots(p(n+1,:));
 %Change of integration variable if it's needed
 if a~=-1 | b~=1
@@ -58,7 +58,7 @@ if a~=-1 | b~=1
 else
    G=f(x);		
 end
-%Polin derivate
+%derivate
 pn=polyder(p(n+1,:));
 
 %Calculus of the coeficients
