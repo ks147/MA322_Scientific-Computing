@@ -12,6 +12,12 @@ starting_value = actual_sol([a,a+h,a+2*h]);
 Adams_Bashforth(a,b,h,f,starting_value,actual_sol,1);
 Adams_Moulton(a,b,h,f,starting_value,actual_sol,2);
 
+h = 0.001;
+starting_value = actual_sol([a,a+h,a+2*h]);
+Adams_Bashforth(a,b,h,f,starting_value,actual_sol,3);
+Adams_Moulton(a,b,h,f,starting_value,actual_sol,4);
+
+
 
 function [t error] = Adams_Bashforth(a,b,h,f,starting_value,actual_sol,fig_no);
 y = starting_value;
