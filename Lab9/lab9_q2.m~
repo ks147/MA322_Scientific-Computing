@@ -8,7 +8,7 @@ alpha = -2;
 beta = 1;
 h = 1/400;
 exact_sol = @(x) x.^2 + x.*exp(x);
-fprintf('Q2(a)\n');
+fprintf('Q2(b)\n');
 y = second_orderQ2(a,b,h,alpha,beta,p,q,r);
 plot_error([a:h:b],y,exact_sol);
 
@@ -24,8 +24,6 @@ beta = 2*sin(1);
 exact_sol = @(x) (x.^2 + x.*exp(x));
 fprintf('Q2(b)\n');
 y = second_orderQ2(a,b,h,alpha,beta,p,q,r);
-
-%Functions
 function y = second_orderQ2(a,b,h,alpha,beta,p,q,r)
 t = [a:h:b];
 n = length(t);
