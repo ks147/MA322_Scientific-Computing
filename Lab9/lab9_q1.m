@@ -14,7 +14,7 @@ central_diff(a,b,h,alpha,beta,p,q,r,1);
 fprintf('The plot for solution using Backward difference for the first order derivative is\n');
 backward_diff(a,b,h,alpha,beta,p,q,r,2);
 fprintf('The plot for solution using Forward difference for the first order derivative is\n');
-forward_diff(a,b,h,alpha,beta,p,q,r,3)
+forward_diff(a,b,h,alpha,beta,p,q,r,3);
 %(b)
 p = @(x) -2;
 q = @(x) -1;

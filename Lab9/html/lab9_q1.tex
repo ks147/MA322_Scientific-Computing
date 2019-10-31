@@ -1,3 +1,19 @@
+
+% This LaTeX was auto-generated from MATLAB code.
+% To make changes, update the MATLAB code and republish this document.
+
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{color}
+
+\sloppy
+\definecolor{lightgray}{gray}{0.5}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+    
+    \begin{verbatim}
 clear all;
 clc;
 p = @(x) -(x+1);
@@ -14,7 +30,7 @@ central_diff(a,b,h,alpha,beta,p,q,r,1);
 fprintf('The plot for solution using Backward difference for the first order derivative is\n');
 backward_diff(a,b,h,alpha,beta,p,q,r,2);
 fprintf('The plot for solution using Forward difference for the first order derivative is\n');
-forward_diff(a,b,h,alpha,beta,p,q,r,3)
+forward_diff(a,b,h,alpha,beta,p,q,r,3);
 %(b)
 p = @(x) -2;
 q = @(x) -1;
@@ -23,7 +39,7 @@ a = 0;
 b = 1;
 h = 0.01;
 alpha = 0;
-beta = 1;
+beta = 0;
 fprintf('Q1(b)\n');
 fprintf('The plot for solution using Central difference for the first order derivative is\n');
 central_diff(a,b,h,alpha,beta,p,q,r,4);
@@ -131,6 +147,31 @@ ylabel('y(x)');
 title('Forward Difference');
 
 end
+\end{verbatim}
+
+        \color{lightgray} \begin{verbatim}Q1(a)
+The plot for solution using Central difference for the first order derivative is
+The plot for solution using Backward difference for the first order derivative is
+The plot for solution using Forward difference for the first order derivative is
+Q1(b)
+The plot for solution using Central difference for the first order derivative is
+The plot for solution using Backward difference for the first order derivative is
+The plot for solution using Forward difference for the first order derivative is
+\end{verbatim} \color{black}
+    
+\includegraphics [width=4in]{lab9_q1_01.eps}
+
+\includegraphics [width=4in]{lab9_q1_02.eps}
+
+\includegraphics [width=4in]{lab9_q1_03.eps}
+
+\includegraphics [width=4in]{lab9_q1_04.eps}
+
+\includegraphics [width=4in]{lab9_q1_05.eps}
+
+\includegraphics [width=4in]{lab9_q1_06.eps}
 
 
 
+\end{document}
+    
