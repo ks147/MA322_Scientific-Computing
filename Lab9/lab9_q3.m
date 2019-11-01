@@ -1,4 +1,7 @@
+clear all;
+clc;
 %-y'' + p(x)y' + q(x)y = r(x)
+
 p = @(x) 0;
 q = @(x) x;
 r = @(x) -1;
@@ -7,7 +10,7 @@ b = 1;
 h = 1/400;
 alpha = 1;
 beta = 1;
-fprintf('Plot for Q3(a)\n');
+fprintf('Plot for Q3(a)\n\n');
 forward_diffQ3a(a,b,h,alpha,beta,p,q,r);
 
 %Q3(b)
@@ -19,7 +22,7 @@ b = 1;
 h = 1/400;
 alpha = 1;
 beta = 1;
-fprintf('Plot for Q3(b)\n');
+fprintf('\n\nPlot for Q3(b)\n');
 forward_diffQ3b(a,b,h,alpha,beta,p,q,r);
 
 
@@ -46,7 +49,7 @@ figure;
 plot(t,y);
 xlabel('x');
 ylabel('y(x)');
-title('Forward Difference');
+title('Second Order Solution Q3(a)');
 
 end
 function y = forward_diffQ3b(a,b,h,alpha,beta,p,q,r)
@@ -73,7 +76,7 @@ figure;
 plot(t,y);
 xlabel('x');
 ylabel('y(x)');
-title('Forward Difference');
+title('Second Order Solution Q3(b)');
 
 end
 

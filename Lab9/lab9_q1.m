@@ -1,5 +1,7 @@
 clear all;
 clc;
+%-y'' + p(x)y' + q(x)y = r(x)
+
 p = @(x) -(x+1);
 q = @(x) cos(x);
 r = @(x) -exp(x);

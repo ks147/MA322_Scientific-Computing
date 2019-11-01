@@ -1,4 +1,7 @@
+clear all;
+clc;
 %-y'' + p(x)y' + q(x)y = r(x)
+
 p = @(x) -x;
 q = @(x) 2;
 r = @(x) -2 -(2+x.^2)*exp(x);
@@ -22,7 +25,7 @@ b = 1;
 alpha = -1;
 beta = 2*sin(1);
 exact_sol = @(x) (x.^2 + x.*exp(x));
-fprintf('Q2(b)\n');
+fprintf('\n\nQ2(b)\n');
 y = second_orderQ2(a,b,h,alpha,beta,p,q,r);
 
 %Functions
@@ -60,7 +63,7 @@ error = abs(exact_sol(x) - y');
 figure;
 plot(x,error);
 xlabel('x');
-ylabel('y(x)');
+ylabel('Error(x)');
 title('Error');
 
 end
