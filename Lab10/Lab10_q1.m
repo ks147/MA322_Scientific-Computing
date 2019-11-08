@@ -16,6 +16,72 @@ k = h^2/4;                                 %k = h^2/4
 c = 4/(pi^2);
 exact_sol = @(x,t) exp(-t).*sin(pi*x/2) + exp(-t/4).*sin(pi*x/4);
 
+% fprintf('\t\t FTCS\n');
+% [num_sol x t] = ftcs(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
+% plot_end_time(exact_sol,num_sol,x,t);
+% surface_plot(exact_sol,num_sol,x,t);
+% % plot_N_Max_error('ftcs',c,a_x,b_x,a_t,b_t,ic,bc_1,bc_2,exact_sol);
+% 
+% fprintf('\t\tBTCS\n');
+% [num_sol x t] = btcs(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
+% plot_end_time(exact_sol,num_sol,x,t);
+% surface_plot(exact_sol,num_sol,x,t);
+% 
+% fprintf('\t\tCrank Nicolson\n');
+% [num_sol x t] = Crank_Nicolson(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
+% plot_end_time(exact_sol,num_sol,x,t);
+% surface_plot(exact_sol,num_sol,x,t);
+% 
+% fprintf('\t\tRichardson\n');
+% [num_sol x t] = Richardson(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
+% plot_end_time(exact_sol,num_sol,x,t);
+% surface_plot(exact_sol,num_sol,x,t);
+
+%%%(b)
+ic = @(x) sin(pi.*x);      %Initial Condition
+bc_1 = @(t) 0;                                  %Boundary Condition 1
+bc_2 = @(t) 0;                                  %Boundary Condition 2
+a_x = 0;                                        %Range x 
+b_x = 1;
+a_t = 0;                                        %Range t
+b_t = 1;
+h = 0.04;
+k = h^2/4;                                 %k = h^2/4
+c = 1;
+exact_sol = @(x,t) exp(-(pi*pi*t)).*sin(pi*x);
+% fprintf('\t\t FTCS\n');
+% [num_sol x t] = ftcs(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
+% plot_end_time(exact_sol,num_sol,x,t);
+% surface_plot(exact_sol,num_sol,x,t);
+% % plot_N_Max_error('ftcs',c,a_x,b_x,a_t,b_t,ic,bc_1,bc_2,exact_sol);
+% 
+% fprintf('\t\tBTCS\n');
+% [num_sol x t] = btcs(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
+% plot_end_time(exact_sol,num_sol,x,t);
+% surface_plot(exact_sol,num_sol,x,t);
+% 
+% fprintf('\t\tCrank Nicolson\n');
+% [num_sol x t] = Crank_Nicolson(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
+% plot_end_time(exact_sol,num_sol,x,t);
+% surface_plot(exact_sol,num_sol,x,t);
+% 
+% fprintf('\t\tRichardson\n');
+% [num_sol x t] = Richardson(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
+% plot_end_time(exact_sol,num_sol,x,t);
+% surface_plot(exact_sol,num_sol,x,t);
+
+%%%(c)%%%%
+ic = @(x) sin(pi.*x/2) + 0.5*sin(2*pi*x);      %Initial Condition
+bc_1 = @(t) 0;                                  %Boundary Condition 1
+bc_2 = @(t) exp(-(pi*pi*t/4));                                  %Boundary Condition 2
+a_x = 0;                                        %Range x 
+b_x = 1;
+a_t = 0;                                        %Range t
+b_t = 1;
+h = 0.04;
+k = h^2/4;                                 %k = h^2/4
+c = 1;
+exact_sol = @(x,t) exp(-(pi*pi*t/4)).*sin(pi*x/2) + 0.5*exp(-(pi*pi*t*4)).*sin(pi*x*2) ;
 fprintf('\t\t FTCS\n');
 [num_sol x t] = ftcs(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
 plot_end_time(exact_sol,num_sol,x,t);
@@ -36,6 +102,7 @@ fprintf('\t\tRichardson\n');
 [num_sol x t] = Richardson(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
 plot_end_time(exact_sol,num_sol,x,t);
 surface_plot(exact_sol,num_sol,x,t);
+
 
 %%FUNCTIONS
 function [U x t] = ftcs(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2)
@@ -82,8 +149,13 @@ for i = 2:m-1
 end
 U = U';
 for j = 2:n
+   U(1,j-1) = bc_1(t(j-1));
+   U(m,j-1) = bc_2(t(j-1));
    U(:,j) = A\U(:,j-1); 
+ 
 end
+U(1,n) = bc_1(t(n));
+U(m,n) = bc_2(t(n));
 U = U';
 end
 
@@ -110,8 +182,12 @@ for i = 2:m-1
 end
 U = U';
 for j = 2:n
+   U(1,j-1) = bc_1(t(j-1));
+   U(m,j-1) = bc_2(t(j-1));
    U(:,j) = (2*eye(m,m) + s*B)\(2*eye(m,m) - s*B)*U(:,j-1); 
 end
+U(1,n) = bc_1(t(n));
+U(m,n) = bc_2(t(n));
 U = U';
 end
 %Explicit scheme hence not solved using matrix
@@ -159,7 +235,7 @@ function surface_plot(exact_sol,num_sol,x,t)
     subplot(1,2,2);
     [X Y] = meshgrid(x,t);
     surf(X,Y,exact_sol(X,Y));
-    title('Surface plot of Numerical Solution and Exact solution\n');
+    title('Surface plot of Numerical Solution and Exact solution');
 end
 
 %scheme-ftcs,btcs,Crank Nicolson etc.
