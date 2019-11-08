@@ -26,18 +26,21 @@ exact_sol = @(x,t) exp(-t).*sin(pi*x/2) + exp(-t/4).*sin(pi*x/4);
 % [num_sol x t] = btcs(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
 % plot_end_time(exact_sol,num_sol,x,t);
 % surface_plot(exact_sol,num_sol,x,t);
+% % plot_N_Max_error('btcs',c,a_x,b_x,a_t,b_t,ic,bc_1,bc_2,exact_sol);
 % 
 % fprintf('\t\tCrank Nicolson\n');
 % [num_sol x t] = Crank_Nicolson(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
 % plot_end_time(exact_sol,num_sol,x,t);
 % surface_plot(exact_sol,num_sol,x,t);
+% %plot_N_Max_error('crank nicolson',c,a_x,b_x,a_t,b_t,ic,bc_1,bc_2,exact_sol);
 % 
 % fprintf('\t\tRichardson\n');
 % [num_sol x t] = Richardson(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
 % plot_end_time(exact_sol,num_sol,x,t);
 % surface_plot(exact_sol,num_sol,x,t);
+% plot_N_Max_error('richardson',c,a_x,b_x,a_t,b_t,ic,bc_1,bc_2,exact_sol);
 
-%%%(b)
+%%(b)
 ic = @(x) sin(pi.*x);      %Initial Condition
 bc_1 = @(t) 0;                                  %Boundary Condition 1
 bc_2 = @(t) 0;                                  %Boundary Condition 2
@@ -49,28 +52,32 @@ h = 0.04;
 k = h^2/4;                                 %k = h^2/4
 c = 1;
 exact_sol = @(x,t) exp(-(pi*pi*t)).*sin(pi*x);
-% fprintf('\t\t FTCS\n');
-% [num_sol x t] = ftcs(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
-% plot_end_time(exact_sol,num_sol,x,t);
-% surface_plot(exact_sol,num_sol,x,t);
-% % plot_N_Max_error('ftcs',c,a_x,b_x,a_t,b_t,ic,bc_1,bc_2,exact_sol);
-% 
-% fprintf('\t\tBTCS\n');
-% [num_sol x t] = btcs(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
-% plot_end_time(exact_sol,num_sol,x,t);
-% surface_plot(exact_sol,num_sol,x,t);
-% 
-% fprintf('\t\tCrank Nicolson\n');
-% [num_sol x t] = Crank_Nicolson(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
-% plot_end_time(exact_sol,num_sol,x,t);
-% surface_plot(exact_sol,num_sol,x,t);
-% 
-% fprintf('\t\tRichardson\n');
-% [num_sol x t] = Richardson(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
-% plot_end_time(exact_sol,num_sol,x,t);
-% surface_plot(exact_sol,num_sol,x,t);
+fprintf('\t\t FTCS\n');
+[num_sol x t] = ftcs(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
+plot_end_time(exact_sol,num_sol,x,t);
+surface_plot(exact_sol,num_sol,x,t);
+% plot_N_Max_error('ftcs',c,a_x,b_x,a_t,b_t,ic,bc_1,bc_2,exact_sol);
 
-%%%(c)%%%%
+fprintf('\t\tBTCS\n');
+[num_sol x t] = btcs(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
+plot_end_time(exact_sol,num_sol,x,t);
+surface_plot(exact_sol,num_sol,x,t);
+% plot_N_Max_error('btcs',c,a_x,b_x,a_t,b_t,ic,bc_1,bc_2,exact_sol);
+
+fprintf('\t\tCrank Nicolson\n');
+[num_sol x t] = Crank_Nicolson(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
+plot_end_time(exact_sol,num_sol,x,t);
+surface_plot(exact_sol,num_sol,x,t);
+% plot_N_Max_error('crank nicolson',c,a_x,b_x,a_t,b_t,ic,bc_1,bc_2,exact_sol);
+
+fprintf('\t\tRichardson\n');
+[num_sol x t] = Richardson(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
+plot_end_time(exact_sol,num_sol,x,t);
+surface_plot(exact_sol,num_sol,x,t);
+% plot_N_Max_error('richardson',c,a_x,b_x,a_t,b_t,ic,bc_1,bc_2,exact_sol);
+
+
+%%(c)%%%%
 ic = @(x) sin(pi.*x/2) + 0.5*sin(2*pi*x);      %Initial Condition
 bc_1 = @(t) 0;                                  %Boundary Condition 1
 bc_2 = @(t) exp(-(pi*pi*t/4));                                  %Boundary Condition 2
@@ -92,16 +99,19 @@ fprintf('\t\tBTCS\n');
 [num_sol x t] = btcs(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
 plot_end_time(exact_sol,num_sol,x,t);
 surface_plot(exact_sol,num_sol,x,t);
+% plot_N_Max_error('btcs',c,a_x,b_x,a_t,b_t,ic,bc_1,bc_2,exact_sol);
 
 fprintf('\t\tCrank Nicolson\n');
 [num_sol x t] = Crank_Nicolson(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
 plot_end_time(exact_sol,num_sol,x,t);
 surface_plot(exact_sol,num_sol,x,t);
+% plot_N_Max_error('crank nicolson',c,a_x,b_x,a_t,b_t,ic,bc_1,bc_2,exact_sol);
 
 fprintf('\t\tRichardson\n');
 [num_sol x t] = Richardson(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
 plot_end_time(exact_sol,num_sol,x,t);
 surface_plot(exact_sol,num_sol,x,t);
+% plot_N_Max_error('richardson',c,a_x,b_x,a_t,b_t,ic,bc_1,bc_2,exact_sol);
 
 
 %%FUNCTIONS
@@ -190,6 +200,7 @@ U(1,n) = bc_1(t(n));
 U(m,n) = bc_2(t(n));
 U = U';
 end
+
 %Explicit scheme hence not solved using matrix
 %Can construct matrix like in btcs,crank_nicolson
 function [U x t] = Richardson(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2)
@@ -242,23 +253,27 @@ end
 function plot_N_Max_error(scheme,c,a_x,b_x,a_t,b_t,ic,bc_1,bc_2,exact_sol) 
     i = 1;
     N = 1;
-    while(N < 1e3)
+    for N = 10:20:90
         h = (b_x - a_x)/(N-1);
-        k = h^2/4;
+        k = h^2/8;
         if scheme=='ftcs'
             [U x t] = ftcs(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
         elseif scheme=='btcs'
-            [U x t] = ftcs(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
+            [U x t] = btcs(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
+        elseif scheme=='crank nicolson'
+            [U x t] = Crank_Nicolson(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
+        else
+            [U x t] = Richardson(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
         end
         error = abs(exact_sol(x',t) - U');
         Max_error(i) = max(max(error));
         i = i+1;
-        N = N+100;
+        
     end
     figure;
-    plot([10:20:1e3],log(log(Max_error)));
+    plot([10:20:90],log(Max_error));
     xlabel('N');
-    ylabel('log(log(Max Error)');
-    Title('N vs Error');    
+    ylabel('log(Max Error)');
+    title('N vs Error');    
 
 end
