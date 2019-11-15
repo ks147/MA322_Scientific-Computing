@@ -17,7 +17,8 @@ exact_sol = @(x,y) x.*y;
 
 % [num_sol x y] = five_point_scheme(a_x,b_x,a_y,b_y,h,k,bc,F);
 % Error_surface_plot(exact_sol,num_sol,x,y);
-% 
+% Error_plot(exact_sol,num_sol,x,y,a_x,a_y,h,k);
+
 %(b)
 F = @(x,y) x.^2 + y.^2;
 bc = @(x,y) BC_b(x,y);
@@ -29,10 +30,11 @@ h = 0.02;
 k = 0.02;
 exact_sol = @(x,y) exp(pi.*x).*sin(pi.*y) +((x.*y).^2)/2;
 
-[num_sol x y] = five_point_scheme(a_x,b_x,a_y,b_y,h,k,bc,F);
-Error_plot(exact_sol,num_sol,x,y,a_y,h,k);
-Error_surface_plot(exact_sol,num_sol,x,y);
+% [num_sol x y] = five_point_scheme(a_x,b_x,a_y,b_y,h,k,bc,F);
+% Error_plot(exact_sol,num_sol,x,y,a_y,h,k);
+% Error_surface_plot(exact_sol,num_sol,x,y);
 
+%(c)
 F = @(x,y) 2.*x - y;
 bc = @(x,y) BC_c(x,y);
 a_x = 0;
@@ -42,8 +44,7 @@ b_y = 1;
 h = 0.02;
 k = 0.02;
 exact_sol = @(x,y) 2.*x - y;
-[num_sol x y] = five_point_scheme(a_x,b_x,a_y,b_y,h,k,bc,F);
-Error_plot(exact_sol,num_sol,x,y,a_y,h,k);
+[num_sol x y] = five_point_scheme(a_x,b_x,a_y,b_y,h,k,bc,F,'c');
 Error_surface_plot(exact_sol,num_sol,x,y);
 
 
@@ -62,11 +63,18 @@ end
 function Error_surface_plot(exact_sol,num_sol,x,y)
 figure;
 [X Y] = meshgrid(x,y);
-Error = abs(exact_sol(X,Y) - num_sol);
+Error = abs(exact_sol(X,Y) - num_sol');
 surf(X,Y,Error);
 zlabel('Error');
 xlabel('x');
 ylabel('y');
+figure;
+surf(X,Y,exact_sol(X,Y));
+title('Exact Solution');
+figure;
+surf(X,Y,num_sol');
+title('Numerical Solution');
+
 
 end
 function f = BC_a(x,y)
@@ -84,11 +92,11 @@ function f = BC_b(x,y)
 if y==0
     f = 0;
 elseif x==0
-    f = sin(pi*y);
+    f = sin(pi.*y);
 elseif y==1
-    f = (x^2)/2;
+    f = (x.^2)/2;
 else
-    f = exp(pi).*sin(pi.*y) + (y^2)/2;
+    f = exp(pi).*sin(pi.*y) + (y.^2)./2;
 end
 
 end
@@ -96,6 +104,13 @@ function f = BC_c(x,y)
 f = 0;
 if y==0
     f = 2.*x;
-elseif x==0
-    f =
+elseif y==1
+    f = 2.*x - 1;
+elseif x==1
+    f = 2 - y;    
 end
+end
+function f = BC_d(x,y)
+
+end
+

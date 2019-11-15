@@ -1,0 +1,22 @@
+clear all;
+clc;
+x0=@(x)0;
+x1=@(x)x.^2/2;
+y0=@(y)sin(pi.*y);
+y1=@(y)exp(pi).*sin(pi.*y)+(y.*y)/2;
+f=@(x,y)-(x.^2+y.^2);
+g=@(x,y)exp(pi.*x).*sin(pi.*y)+(y.*y.*x.*x)./2;;
+a=0;
+b=1;
+c=0;
+d=1;
+h=0.02;
+k=0.02;
+x=a:h:b;
+y=c:k:d;
+output=fps(f,x,y,x0,x1,y0,y1);
+figure(1)
+[X,Y]=meshgrid(x,y);
+surf(X,Y,output);
+figure(2);
+surf(X,Y,g(X,Y));

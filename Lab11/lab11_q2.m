@@ -15,8 +15,12 @@ h = 0.02;
 k = 0.02;
 exact_sol = @(x,y) x.*y;
 
-fprintf('Q1(a)\n');
-[num_sol x y] = five_point_scheme(a_x,b_x,a_y,b_y,h,k,bc,F,'a','Gauss Elimination');
+fprintf('Q2(a)\n');
+fprintf('\n\nGAUSS SEIDEL\n\n');
+[num_sol x y] = five_point_scheme(a_x,b_x,a_y,b_y,h,k,bc,F,'a','Gauss Seidel');
+Error_surface_plot(exact_sol,num_sol,x,y);
+fprintf('\n\nJACOBI ELIMINATION\n\n');
+[num_sol x y] = five_point_scheme(a_x,b_x,a_y,b_y,h,k,bc,F,'a','Jacobi');
 Error_surface_plot(exact_sol,num_sol,x,y);
 
 %(b)
@@ -30,9 +34,14 @@ h = 0.02;
 k = 0.02;
 exact_sol = @(x,y) exp(pi.*x).*sin(pi.*y) +((x.*y).^2)/2;
 
-fprintf('\n\nQ1(b)\n\n');
-[num_sol x y] = five_point_scheme(a_x,b_x,a_y,b_y,h,k,bc,F,'b','Gauss Elimination');
+fprintf('\n\nQ2(b)\n\n');
+fprintf('\n\nGAUSS SEIDEL\n\n');
+[num_sol x y] = five_point_scheme(a_x,b_x,a_y,b_y,h,k,bc,F,'b','Gauss Seidel');
 Error_surface_plot(exact_sol,num_sol,x,y);
+fprintf('\n\nJACOBI ELIMINATION\n\n');
+[num_sol x y] = five_point_scheme(a_x,b_x,a_y,b_y,h,k,bc,F,'b','Jacobi');
+Error_surface_plot(exact_sol,num_sol,x,y);
+
 
 %(c)
 F = @(x,y) 2.*x - y;
@@ -44,9 +53,14 @@ b_y = 1;
 h = 0.02;
 k = 0.02;
 exact_sol = @(x,y) 2.*x - y;
-fprintf('\n\nQ1(c)\n\n');
-[num_sol x y] = five_point_scheme(a_x,b_x,a_y,b_y,h,k,bc,F,'c','Gauss Elimination');
+fprintf('\n\nQ2(c)\n\n');
+fprintf('GAUSS SEIDEL\n\n');
+[num_sol x y] = five_point_scheme(a_x,b_x,a_y,b_y,h,k,bc,F,'c','Gauss Seidel');
 Error_surface_plot(exact_sol,num_sol,x,y);
+fprintf('\n\nJACOBI ELIMINATION\n\n');
+[num_sol x y] = five_point_scheme(a_x,b_x,a_y,b_y,h,k,bc,F,'c','Jacobi');
+Error_surface_plot(exact_sol,num_sol,x,y);
+
 
 %(d)
 
@@ -59,9 +73,15 @@ b_y = 1;
 h = 0.02;
 k = 0.02;
 exact_sol = @(x,y) exp(x).*cos(y);
-fprintf('\n\nQ1(d)\n\n');
-[num_sol x y] = five_point_scheme(a_x,b_x,a_y,b_y,h,k,bc,F,'d','Gauss Elimination');
+fprintf('\n\nQ2(d)\n\n');
+fprintf('GAUSS SEIDEL\n\n');
+[num_sol x y] = five_point_scheme(a_x,b_x,a_y,b_y,h,k,bc,F,'d','Gauss Seidel');
 Error_surface_plot(exact_sol,num_sol,x,y);
+fprintf('\n\nJACOBI ELIMINATION\n\n');
+[num_sol x y] = five_point_scheme(a_x,b_x,a_y,b_y,h,k,bc,F,'d','Jacobi');
+Error_surface_plot(exact_sol,num_sol,x,y);
+
+
 
 function Error_plot(exact_sol,num_sol,x,y,a_x,a_y,h,k)
 figure;
