@@ -12,11 +12,11 @@ b_x = 4;
 a_t = 0;                                        %Range t
 b_t = 1;
 h = 0.01;
-k = 1e-5;                                 %k = h^2/4
+k = h^2/6;                                 %k = h^2/4
 c = 4/(pi^2);
 exact_sol = @(x,t) exp(-t).*sin(pi*x/2) + exp(-t/4).*sin(pi*x/4);
 
-[num_sol x t] = ftcs(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
+[num_sol x t] = Duford(c,a_x,b_x,a_t,b_t,h,k,ic,bc_1,bc_2);
 plot_end_time(exact_sol,num_sol,x,t);
 surface_plot(exact_sol,num_sol,x,t);
 
@@ -53,9 +53,10 @@ legend('Numerical Solution','Exact Solution')
 end
 function surface_plot(exact_sol,num_sol,x,t)
 figure;
-mesh(x,t,num_sol);
+[X,T] = meshgrid(x,t);
+surf(X,T,num_sol);
 figure;
-mesh(x,t,exact_sol(x,t));
+surf(X,T,exact_sol(X,T));
 end
 
 

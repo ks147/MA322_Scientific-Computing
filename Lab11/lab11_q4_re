@@ -1,0 +1,11 @@
+a = 2;
+ic = @(x) 1 + sin(pi.*x);
+bc = @(t) 1;
+h = 5*1e-4;
+k = 1e-3;
+a_x = 0;
+b_x = 0;
+a_t = 0;
+b_t = 0;
+[num_sol x t] = Lax_Wendroff(a_x,b_x,a_t,b_t,h,k,a,ic,bc);
+[X,T] = meshgrif(x,t(1:4));
